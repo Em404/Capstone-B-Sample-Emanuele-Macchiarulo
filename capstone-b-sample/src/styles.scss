@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+// bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+  --black: #171717;
+  --purple: #442163;
+}
+
+.bg-body-black {
+  background-color: var(--black);
+}
+
+// custom nav link
+.custom-nav-link {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.custom-nav-link:hover {
+  color: var(--purple);
+  border-bottom: 2px solid #fff;
+}
+
+// button btn-purple
+.btn-purple {
+  color: #fff;
+  background-color: var(--purple)
+}
+
+.btn-purple:hover {
+  color: var(--purple);
+  background-color: #fff;
+}
