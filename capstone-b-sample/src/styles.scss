@@ -24,15 +24,20 @@
 .custom-nav-link:hover {
   color: var(--purple);
   border-bottom: 2px solid #fff;
+  font-size: 1.4rem;
 }
 
 // button btn-purple
 .btn-purple {
   color: #fff;
-  background-color: var(--purple)
+  background-color: var(--purple);
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
 }
 
 .btn-purple:hover {
   color: var(--purple);
   background-color: #fff;
+  font-size: 1.4rem;
 }

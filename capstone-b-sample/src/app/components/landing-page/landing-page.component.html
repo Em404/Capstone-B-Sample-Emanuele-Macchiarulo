@@ -1,17 +1,53 @@
 <ngb-carousel>
   <ng-template ngbSlide *ngFor="let image of images; let i = index">
-    <div class="custom-carousel" >
+    <div class="custom-carousel">
       <div class="container">
         <div class="row">
-          <div class="col-sm-12 col-md-6 mb-4 mb-md-0">
+          <div class="col-sm-12 col-md-6 mb-4 mb-md-0 text-center">
             <img [src]="image.src" alt="Slide" class="img-fluid" />
           </div>
-          <div class="col-sm-12 col-md-6">
-            <h3 class="text-white">I sample di <span [style.color]="textColors[i]">{{ image.description }}</span> con il punch che ti serve</h3>
-            <p class="text-white">{{ image.additionalText }}</p>
+          <div class="col-sm-12 col-md-6 text-center text-md-start">
+            <div class="mt-0 mt-lg-5">
+              <h2 class="text-white mb-3 mt-2 mt-md-0">
+                Samples di
+                <span [style.color]="textColors[i]">{{ image.sample }} </span>
+                <span>{{ image.title }}</span>
+              </h2>
+              <p class="custom-text-carousel mb-3 d-none d-md-block">
+                {{ image.description }}
+              </p>
+              <p class="custom-text-carousel-secondary mb-5 d-none d-lg-block">
+                {{ image.subDescription }}
+              </p>
+              <a
+                class="btn btn-carousel mt-3 mt-md-0"
+                [style.background-color]="textColors[i]"
+                >Esplora ora</a
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
   </ng-template>
 </ngb-carousel>
+
+<div class="bg-body-black border-bottom">
+  <div class="container banner-container">
+    <div class="row">
+      <div
+        class="col-sm-12 col-md-6 mb-4 mb-md-0 text-white text-center text-md-start"
+      >
+        <p class="text-banner">
+          Cerca nuovi sample, aggiungili ai tuoi preferiti ed esegui il download
+          per poterli usare nelle tue produzioni!
+        </p>
+        <p class="text-banner-bold">Cosa Aspetti?</p>
+        <p class="text-banner-bold">Effettua ora il login!</p>
+      </div>
+      <div class="col-sm-12 col-md-6 text-center">
+        <a class="btn btn-purple">LOGIN</a>
+      </div>
+    </div>
+  </div>
+</div>
