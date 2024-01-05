@@ -4,6 +4,9 @@
 
 // font
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 
 :root {
   --black: #171717;
@@ -39,5 +42,4 @@
 .btn-purple:hover {
   color: var(--purple);
   background-color: #fff;
-  font-size: 1.4rem;
 }
