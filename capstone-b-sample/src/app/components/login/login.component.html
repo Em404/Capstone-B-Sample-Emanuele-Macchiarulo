@@ -1,0 +1,24 @@
+<div class="bg-body-gradient">
+  <div class="container p-5 form-container">
+    <div class="row row-form">
+      <div class="col-sm-12 col-md-6 col-left p-5">
+        <img src="../../../assets/img/nav/B-SAMPLE-logo-round.png" alt="logo" width="50" height="50"/>
+        <h3 class="my-2">Esegui ora il login e inizia a cercare i sample per le tue produzioni!</h3>
+        <p class="my-3">Usa il codice di autentizaione di Freesound.</p>
+      </div>
+      <div class="col-sm-12 col-md-6 col-right py-5 px-sm-0 px-lg-5">
+        <form [formGroup]="loginForm">
+          <div class="container text-center">
+            <button class="btn btn-purple my-3" (click)="goToFreesound()">Autenticati su Freesound!</button>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingInput" placeholder="Inserisci il codice di autenticazione" formControlName="code"/>
+              <label for="floatingInput">Codice di atuenticazione</label>
+            </div>
+            <button class="btn btn-purple my-3" (click)="login()">Login</button>
+            <p>Non hai un codice di autenticazione? Vai ora su <span><a href="https://freesound.org/home/login/?next=/apiv2/apply">Freesound</a></span> e ottienine uno!</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
