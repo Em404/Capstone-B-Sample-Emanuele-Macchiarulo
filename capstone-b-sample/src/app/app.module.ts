@@ -12,6 +12,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PreferitiComponent } from './components/preferiti/preferiti.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -20,16 +22,17 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     LandingPageComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    PreferitiComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

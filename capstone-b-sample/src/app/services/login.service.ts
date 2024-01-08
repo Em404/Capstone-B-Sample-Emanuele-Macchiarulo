@@ -1,8 +1,9 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
+import { CookieStorageService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class LoginService {
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedInSubject.asObservable();
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(private router: Router, private apiService: ApiService,  private cookieSvc: CookieStorageService) {}
 
   goToFreeSound() {
     const params = new HttpParams()
@@ -37,16 +38,39 @@ export class LoginService {
       .set('code', authcode);
     this.apiService
       .post('https://freesound.org/apiv2/oauth2/access_token/', body)
-      .then((res: any) => {
+      .then((res) => {
         this.accessToken = res.access_token;
         this.refreshToken = res.refresh_token;
         this.router.navigate(['/home']);
-        // this.cookieStorageService.setCookie(this.refreshToken);
+        this.cookieSvc.setCookie(this.refreshToken);
         this.userData.next(res);
         this.loggedInSubject.next(true);
       })
-      .catch((err: any) => {
+      .catch((err) => {
         alert('errore');
+      });
+  }
+
+  onReload(token: string) {
+    const body = new HttpParams()
+      .set('client_id', this.clientId)
+      .set('client_secret', this.key)
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', token);
+    console.log(body);
+    this.apiService
+      .post('https://freesound.org/apiv2/oauth2/access_token/', body)
+      .then((res) => {
+        this.accessToken = res.access_token;
+        this.refreshToken = res.refresh_token;
+        this.cookieSvc.setCookie(this.refreshToken);
+        console.log(this.accessToken);
+        console.log(this.refreshToken);
+        this.userData.next(res);
+      })
+      .catch((err) => {
+        alert('errore');
+        this.logOutWithoutToken();
       });
   }
 
@@ -54,6 +78,11 @@ export class LoginService {
     this.userData.next(null);
     this.loggedInSubject.next(false);
     this.router.navigate(['login']);
+  }
+
+  logOutWithoutToken() {
+    this.cookieSvc.deleteCookie();
+    this.userData.next(null);
   }
 
   isLoggedIn(): boolean {
