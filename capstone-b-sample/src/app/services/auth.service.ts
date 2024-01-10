@@ -10,7 +10,7 @@ export class AuthService {
   hasAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private loginService: LoginService) {
-    this.loginService.userData.subscribe((user) => {
+    this.loginService.loggedIn$.subscribe((user) => {
       if (user) {
         this.changeAuth(true);
       } else {
@@ -30,4 +30,8 @@ export class AuthService {
   public logOut() {
     return this.loginService.logout();
   }
+
+  // loginByToken(token: string) {
+  //   this.loginService.onReload(token);
+  // }
 }

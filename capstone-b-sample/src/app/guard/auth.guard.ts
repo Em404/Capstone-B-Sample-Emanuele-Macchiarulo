@@ -2,17 +2,23 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { CookieStorageService } from '../services/cookie.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+export class AuthGuard {
+  constructor(
+    private authSvc: AuthService,
+    private cookieSvc: CookieStorageService,
+    private router: Router
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -22,11 +28,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      const isLogged = this.authService.isLogged;
-      if (isLogged) {
-        return true;
-      }
-      this.authService.logOut();
+    const isLogged = this.authSvc.isLogged;
+    if (isLogged) {
+      return true;
+    } else {
+      this.authSvc.logOut();
       return false;
+    }
   }
 }

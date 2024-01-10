@@ -16,7 +16,7 @@ export class LoginComponent {
   loginForm: UntypedFormGroup = new UntypedFormGroup({
     code: new UntypedFormControl('', [Validators.required]),
   });
-  constructor(private loginService: LoginService) {}
+  constructor(private loginSvc: LoginService) {}
 
   ngOnInit(): void {}
 
@@ -25,14 +25,14 @@ export class LoginComponent {
 
     if (codeControl && codeControl.value) {
       const authCode = codeControl.value;
-      this.loginService.login(authCode);
+      this.loginSvc.login(authCode);
     } else {
       // Handle the case where the code control or its value is null
     }
   }
 
   goToFreesound() {
-    this.loginService.goToFreeSound();
+    this.loginSvc.goToFreeSound();
   }
 
 }
