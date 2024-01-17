@@ -40,7 +40,9 @@ export class LoginService {
     this.apiSvc
       .post('https://freesound.org/apiv2/oauth2/access_token/', body)
       .then((res) => {
-        // this.accessToken = res.access_token;
+        this.accessToken = res.access_token;
+        console.log(this.accessToken);
+        localStorage.setItem('accessToken', this.accessToken)
         // this.refreshToken = res.refresh_token;
         localStorage.setItem('accessData', JSON.stringify(res))
         this.loggedInSubject.next(true);
@@ -103,7 +105,6 @@ export class LoginService {
   isLoggedIn(): boolean {
     // console.log(this.loggedInSubject.value);
     // console.log(this.userData);
-
     return this.loggedInSubject.value;
   }
 }

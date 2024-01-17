@@ -3,9 +3,9 @@
 @import "bootstrap/scss/bootstrap";
 
 // font
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h3 {
@@ -21,8 +21,13 @@ h3 {
   background-color: var(--black);
 }
 .bg-body-gradient {
-  background: rgb(26,28,30);
-  background: linear-gradient(0deg, rgba(26,28,30,1) 0%, rgba(32,34,38,1) 35%, rgba(37,38,44,1) 100%);
+  background: rgb(26, 28, 30);
+  background: linear-gradient(
+    0deg,
+    rgba(26, 28, 30, 1) 0%,
+    rgba(32, 34, 38, 1) 35%,
+    rgba(37, 38, 44, 1) 100%
+  );
   color: #fff;
 }
 
@@ -51,4 +56,20 @@ h3 {
   color: var(--purple);
   background-color: #fff;
   border: 1px solid var(--purple);
+}
+
+// card
+.card-bg-black {
+  background-color: var(--black);
+  color: #fff;
+}
+
+.card-bg-black:hover {
+  -webkit-box-shadow: 0px 0px 10px 5px #442163;
+  box-shadow: 0px 0px 10px 5px #442163;
+}
+
+.card-bg-black-clicked {
+  -webkit-box-shadow: 0px 0px 10px 5px #442163;
+  box-shadow: 0px 0px 10px 5px #442163;
 }

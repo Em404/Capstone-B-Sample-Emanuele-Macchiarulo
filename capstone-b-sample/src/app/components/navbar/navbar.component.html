@@ -15,6 +15,9 @@
       <div class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li *ngIf="isLoggedIn()" class="nav-item">
+            <a class="nav-link custom-nav-link" routerLink="/home">Home</a>
+          </li>
+          <li *ngIf="isLoggedIn()" class="nav-item">
             <a class="nav-link custom-nav-link" routerLink="/preferiti">Preferiti</a>
           </li>
           <li class="nav-item">

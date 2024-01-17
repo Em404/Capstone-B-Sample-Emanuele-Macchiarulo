@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PreferitiComponent } from './components/preferiti/preferiti.component';
+import { SampleComponent } from './components/sample/sample.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PreferitiComponent } from './components/preferiti/preferiti.component';
     LandingPageComponent,
     LoginComponent,
     HomeComponent,
-    PreferitiComponent
+    PreferitiComponent,
+    SampleComponent
   ],
   imports: [
     BrowserModule,
