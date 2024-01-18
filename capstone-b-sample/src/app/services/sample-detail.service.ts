@@ -8,6 +8,7 @@ import { ISample, ISampleDetail } from '../models/i-sample';
 export class SampleDetailService {
 
   dataDetail!: ISampleDetail
+  preferiti: ISampleDetail[] = []
 
   constructor(private apiSvc: ApiService) { }
 
@@ -66,5 +67,30 @@ export class SampleDetailService {
         alert('errore');
       });
   }
+
+  addToFavourite(sample: ISampleDetail) {
+    console.log(sample);
+    const preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
+    const isPresent = preferiti.find((s: ISampleDetail) => s.id === sample.id)
+    if(isPresent) {
+      localStorage.setItem("preferiti", JSON.stringify(preferiti.filter((s: ISampleDetail) => s.id !== sample.id)))
+    } else {
+      preferiti.unshift(sample)
+      localStorage.setItem('preferiti', JSON.stringify(preferiti))
+      console.log(sample.name + ' aggiunto ai preferiti')
+      console.log(preferiti);
+    }
+  }
+
+  checkFavourite(sample: ISampleDetail) {
+    const preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
+    return (preferiti.find((s: ISampleDetail) => s.id === sample.id))
+  }
+
+  // deleteFromFavourite(id: number) {
+  //   this.preferiti = this.preferiti.filter(pref => pref.id !== id);
+  //   localStorage.setItem("preferiti", JSON.stringify(this.preferiti))
+  //   console.log(this.preferiti);
+  // }
 
 }

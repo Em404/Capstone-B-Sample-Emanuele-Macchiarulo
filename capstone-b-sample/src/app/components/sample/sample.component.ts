@@ -1,30 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ISample, ISampleDetail } from '../../models/i-sample';
-import { ApiService } from '../../services/api.service';
-import { LoginService } from '../../services/login.service';
-import { SampleService } from '../../services/sample.service';
+import { Component, Input } from '@angular/core';
+import { ISampleDetail } from '../../models/i-sample';
 import { SampleDetailService } from '../../services/sample-detail.service';
+import { SampleService } from '../../services/sample.service';
 
 @Component({
   selector: 'app-sample',
   templateUrl: './sample.component.html',
-  styleUrl: './sample.component.scss'
+  styleUrl: './sample.component.scss',
 })
 export class SampleComponent {
+  @Input() data!: ISampleDetail;
 
-  @Input() data!: ISampleDetail
-  // sampleDetail!: ISampleDetail
+  constructor(private sampleDetailSvc: SampleDetailService, private sampleSvc: SampleService) {}
 
-  constructor(private sampleDetailSvc: SampleDetailService){}
-
-  // ngOnInit(): void {
-    // this.sampleDetail = this.sampleDetailSvc.getDataDetail()
-  // }
+  preferiti: ISampleDetail[] = [];
 
   setShowPrev(detail: ISampleDetail) {
     this.data = {
       ...this.data,
-      showPrev: (typeof this.data?.showPrev === undefined) ? true : !this.data?.showPrev,
+      showPrev:
+        typeof this.data?.showPrev === undefined ? true : !this.data?.showPrev,
       previews: detail.previews,
       description: detail.description,
       type: detail.type,
@@ -32,23 +27,31 @@ export class SampleComponent {
       duration: detail.duration,
       username: detail.username,
       images: detail.images,
-    }
+    };
   }
 
-  // setSampleDetail(newSampleDetail: ISampleDetail) {
-  //   this.sampleDetail = newSampleDetail
-  // }
-
   handleClickDetails() {
-    this.sampleDetailSvc.getDetailSample(this.data.id)
-    this.setShowPrev(this.sampleDetailSvc.getDataDetail())
-    console.log(this.data);
-
-    // this.setSampleDetail(this.sampleDetailSvc.getDataDetail())
+    this.sampleDetailSvc.getDetailSample(this.data.id);
+    setTimeout(() => {
+      this.setShowPrev(this.sampleDetailSvc.getDataDetail());
+      console.log(this.data);
+    }, 500);
   }
 
   handleDownload() {
-    this.sampleDetailSvc.downloadSample(this.data.id)
+    this.sampleDetailSvc.downloadSample(this.data.id);
   }
+
+  handleFavourite() {
+    this.sampleDetailSvc.addToFavourite(this.data)
+  }
+
+  isFavourite() {
+    return this.sampleDetailSvc.checkFavourite(this.data)
+  }
+
+  // handleRemoveFavourite() {
+  //   this.sampleDetailSvc.deleteFromFavourite(this.data.id)
+  // }
 
 }

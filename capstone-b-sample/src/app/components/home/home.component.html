@@ -1,7 +1,7 @@
 <div class="bg-body-gradient">
   <div class="container py-5">
     <!-- ricerca sample -->
-    <form class="mb-5">
+    <div class="mb-5">
       <div class="container text-center">
         <div class="form-floating">
           <input
@@ -10,17 +10,17 @@
             id="floatingInput"
             placeholder="Inserisci il codice di autenticazione"
             formControlName="code"
+            (input)="searchSample($event)"
           />
           <label for="floatingInput">Cerca i tuoi samples</label>
         </div>
-        <button class="btn btn-purple my-3" (click)="searchSample()">
+        <!-- <button class="btn btn-purple my-3" (click)="searchSample()">
           Cerca
-        </button>
+        </button> -->
       </div>
-    </form>
+    </div>
 
     <!-- risultato della ricerca -->
-    <div></div>
 
     <!-- load sample oninit -->
     <div class="container border-top">

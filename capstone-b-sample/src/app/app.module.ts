@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PreferitiComponent } from './components/preferiti/preferiti.component';
 import { SampleComponent } from './components/sample/sample.component';
+import { BytesPipe } from './components/sample/pipe-bytes';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SampleComponent } from './components/sample/sample.component';
     LoginComponent,
     HomeComponent,
     PreferitiComponent,
-    SampleComponent
+    SampleComponent,
+    BytesPipe
   ],
   imports: [
     BrowserModule,

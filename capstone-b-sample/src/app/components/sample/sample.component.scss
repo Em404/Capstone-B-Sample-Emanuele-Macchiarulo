@@ -1,3 +1,11 @@
-p, span {
+p,
+span {
   font-weight: 600;
+}
+
+.btn-card {
+  color: #fff;
+  background-color: var(--purple);
+  font-weight: 600;
+  font-size: 1.2rem;
 }

@@ -12,7 +12,7 @@ export class SampleService {
   sampleListSubject: BehaviorSubject<ISample[]> = new BehaviorSubject<
     ISample[]
   >([]);
-  sampleObj: ISampleObj | undefined;
+  sampleObj!: ISampleObj;
 
   nextPage: string =''
   previousPage: string =''
@@ -28,9 +28,23 @@ export class SampleService {
       })
       .then((res: ISampleObj) => {
         this.sampleList = res.results;
+        // console.log(res);
+        // console.log(this.sampleList);
+
+      });
+  }
+
+  searchSamples(param: string) {
+    this.apiSvc
+      .get('https://freesound.org/apiv2/search/text/?query=' + param, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((res: ISampleObj) => {
+        this.sampleList = res.results;
         console.log(res);
         console.log(this.sampleList);
-
       });
   }
 

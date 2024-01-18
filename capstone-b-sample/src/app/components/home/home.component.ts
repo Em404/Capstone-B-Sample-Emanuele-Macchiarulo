@@ -1,35 +1,42 @@
 import { Component } from '@angular/core';
 import { SampleService } from '../../services/sample.service';
-import { ISample, ISampleDetail } from '../../models/i-sample';
+import { ISample, ISampleDetail, ISampleObj } from '../../models/i-sample';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  sampleForm: UntypedFormGroup;
 
-  constructor(
-    private sampleSvc: SampleService,
-  ) {}
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.sampleSvc.getSamples();
-    }, 2000);
-
+  constructor(private sampleSvc: SampleService) {
+    this.sampleForm = new UntypedFormGroup({
+      search: new UntypedFormControl('', [Validators.required]),
+    });
   }
 
-  public get list(): ISampleDetail [] {
+  ngOnInit(): void {
+    this.sampleSvc.getSamples();
+  }
+
+  public get list(): ISampleDetail[] {
     return this.sampleSvc.sampleList;
   }
 
-  toggle(id: number) {
-    // const elemento = this.sampleSvc.sampleList.find((el) => el = id)
-  }
-
-  searchSample(){
-
+  searchSample(event: Event) {
+    const search = (event.target as HTMLInputElement).value
+    console.log('sto cercando', search);
+    if(search === '') {
+      this.sampleSvc.getSamples();
+    } else {
+      this.sampleSvc.searchSamples(search)
+    }
   }
 
 }
