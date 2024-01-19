@@ -1,0 +1,23 @@
+@media screen and (max-width: 365px) {
+  .wrap-container {
+    min-height: 536px;
+  }
+}
+
+@media screen and (min-width: 366px) {
+  .wrap-container {
+    min-height: 567px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wrap-container {
+    min-height: 583px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .wrap-container {
+    min-height: 670px;
+  }
+}

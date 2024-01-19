@@ -30,7 +30,6 @@ export class SampleService {
         this.sampleList = res.results;
         // console.log(res);
         // console.log(this.sampleList);
-
       });
   }
 

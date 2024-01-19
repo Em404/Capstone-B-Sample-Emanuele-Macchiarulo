@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { SampleDetailService } from '../../services/sample-detail.service';
+import { Component } from '@angular/core';
 import { ISampleDetail } from '../../models/i-sample';
 
 @Component({
@@ -11,7 +10,7 @@ export class PreferitiComponent {
 
   preferiti: ISampleDetail[] = []
 
-  constructor(private sampleDetailSvc: SampleDetailService) {}
+  constructor() {}
 
   ngOnInit() {
     this.getFavourites()
@@ -19,6 +18,11 @@ export class PreferitiComponent {
 
   getFavourites() {
     this.preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
+  }
+
+  isEmpty() {
+    this.preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
+    return this.preferiti.length === 0;
   }
 
 }
