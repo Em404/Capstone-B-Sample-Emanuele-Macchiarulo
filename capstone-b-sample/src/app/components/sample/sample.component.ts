@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ISampleDetail } from '../../models/i-sample';
 import { SampleDetailService } from '../../services/sample-detail.service';
-import { SampleService } from '../../services/sample.service';
 
 @Component({
   selector: 'app-sample',
@@ -11,7 +10,7 @@ import { SampleService } from '../../services/sample.service';
 export class SampleComponent {
   @Input() data!: ISampleDetail;
 
-  constructor(private sampleDetailSvc: SampleDetailService, private sampleSvc: SampleService) {}
+  constructor(private sampleDetailSvc: SampleDetailService) {}
 
   preferiti: ISampleDetail[] = [];
 

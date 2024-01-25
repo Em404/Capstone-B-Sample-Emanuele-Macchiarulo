@@ -1,39 +1,54 @@
 <div class="bg-body-gradient wrap-container">
-  <div class=" ">
-    <div class="header sticky-top bg-body-purple py-3">
-      <div class="text-center mb-5">
-        <h3 class="my-2">Benvenuto in B-Sample</h3>
-        <h4 class="my-3">Inizia ora la ricerca dei tuoi samples per le tue prossime produzioni!</h4>
-      </div>
-      <!-- ricerca sample -->
-      <div class="mb-5">
-        <div class="container text-center text-dark">
-          <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Inserisci il codice di autenticazione"
-              formControlName="code"
-              (input)="searchSample($event)"
-            />
-            <label for="floatingInput">Cerca i tuoi samples</label>
-          </div>
-          <!-- <button class="btn btn-purple my-3" (click)="searchSample()">
+  <div class="bg-body-purple py-3">
+    <div class="text-center">
+      <h3 class="my-2">Benvenuto in B-Sample</h3>
+      <h4 class="my-2">
+        Inizia ora la ricerca dei tuoi samples per le tue prossime produzioni!
+      </h4>
+    </div>
+  </div>
+  <div class="sticky-top bg-body-purple py-2">
+    <!-- ricerca sample -->
+    <div class="py-2">
+      <div class="container text-center text-dark">
+        <div class="form-floating">
+          <!-- <input type="text" class="form-control" id="floatingInput" placeholder="Inserisci il codice di autenticazione" formControlName="code" (input)="searchSample($event)"/> -->
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            placeholder="Inserisci il codice di autenticazione"
+            (input)="searchSample($event)"
+          />
+          <label for="floatingInput">Cerca i tuoi samples</label>
+        </div>
+        <!-- <button class="btn btn-purple my-3" (click)="searchSample()">
             Cerca
           </button> -->
-        </div>
       </div>
     </div>
-    <!-- load sample oninit -->
-    <div class="container">
-      <div class="mt-5">
-        <h4 class="my-3">Ecco dei risultati...</h4>
-        <div class="row justify-content-center mt-3">
-          <div class="col-12 mb-3" *ngFor="let sample of list">
-            <app-sample [data]="sample"></app-sample>
-          </div>
+  </div>
+
+  <!-- load sample oninit -->
+  <div class="container">
+    <div class="mt-5">
+      <div class="row justify-content-center mt-3">
+        <div class="col-12 mb-3" *ngFor=" let sample of list | slice : (page - 1) * pageSize : page * pageSize; track: item">
+          <app-sample [data]="sample"></app-sample>
         </div>
+      </div>
+      <ngb-pagination
+        class="d-flex justify-content-center pagination"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [maxSize]="5"
+        [rotate]="true"
+        [ellipses]="false"
+        [collectionSize]="pages"
+      />
+      <div class="navigation d-flex justify-content-between pb-5">
+        <button class="btn btn-purple" (click)="goToPreviousPage()" [disabled]="!listObj.previous">Indietro</button>
+        <button class="btn btn-purple" (click)="goToNextPage()" [disabled]="!listObj.next">Avanti</button>
       </div>
     </div>
   </div>

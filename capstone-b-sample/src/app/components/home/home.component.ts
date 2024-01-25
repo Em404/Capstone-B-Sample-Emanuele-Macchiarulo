@@ -6,6 +6,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,10 @@ import {
 })
 export class HomeComponent {
   sampleForm: UntypedFormGroup;
+
+  public page: number = 1
+  public pageSize: number = 15
+  public items: number = 0
 
   constructor(private sampleSvc: SampleService) {
     this.sampleForm = new UntypedFormGroup({
@@ -29,6 +34,15 @@ export class HomeComponent {
     return this.sampleSvc.sampleList;
   }
 
+  public get listObj(): ISampleObj {
+    return this.sampleSvc.sampleObj;
+  }
+
+  public get pages(): number {
+    this.items = Math.ceil(this.sampleSvc.sampleObj.count! / this.pageSize)
+    return this.items
+  }
+
   searchSample(event: Event) {
     const search = (event.target as HTMLInputElement).value
     console.log('sto cercando', search);
@@ -37,6 +51,14 @@ export class HomeComponent {
     } else {
       this.sampleSvc.searchSamples(search)
     }
+  }
+
+  goToPreviousPage() {
+    this.sampleSvc.toPreviousPage()
+  }
+
+  goToNextPage() {
+    this.sampleSvc.toNextPage()
   }
 
 }

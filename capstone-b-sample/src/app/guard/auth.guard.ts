@@ -8,7 +8,6 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { CookieStorageService } from '../services/cookie.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,6 @@ import { CookieStorageService } from '../services/cookie.service';
 export class AuthGuard {
   constructor(
     private authSvc: AuthService,
-    private cookieSvc: CookieStorageService,
     private router: Router
   ) {}
 

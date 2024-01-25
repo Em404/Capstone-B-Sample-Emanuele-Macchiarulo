@@ -34,8 +34,4 @@ export class NavbarComponent {
     }
   }
 
-  // public get isLogged(): boolean {
-  //   return this.authSvc.isLogged;
-  // }
-
 }
