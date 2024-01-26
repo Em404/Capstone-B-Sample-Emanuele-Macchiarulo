@@ -9,3 +9,9 @@ span {
   font-weight: 600;
   font-size: 1.2rem;
 }
+
+// audio
+audio::-webkit-media-controls-play-button {
+  background-color: var(--purple);
+  border-radius: 50%;
+}

@@ -9,6 +9,7 @@ export class SampleDetailService {
 
   dataDetail!: ISampleDetail
   preferiti: ISampleDetail[] = []
+  // loading: boolean = false
 
   constructor(private apiSvc: ApiService) { }
 
@@ -52,7 +53,7 @@ export class SampleDetailService {
   }
 
   downloadSample(id: Number) {
-    this.apiSvc
+    return this.apiSvc
       .get('https://freesound.org/apiv2/sounds/' + id + '/download/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -64,7 +65,7 @@ export class SampleDetailService {
           'https://freesound.org/apiv2/sounds/' + id + '/download/';
       })
       .catch((err) => {
-        alert('errore');
+        alert('errore download');
       });
   }
 

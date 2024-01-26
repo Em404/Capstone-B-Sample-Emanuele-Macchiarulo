@@ -43,6 +43,10 @@ export class HomeComponent {
     return this.items
   }
 
+  public get loading(): boolean {
+    return this.sampleSvc.loading
+  }
+
   searchSample(event: Event) {
     const search = (event.target as HTMLInputElement).value
     console.log('sto cercando', search);
@@ -59,6 +63,20 @@ export class HomeComponent {
 
   goToNextPage() {
     this.sampleSvc.toNextPage()
+  }
+
+  changePage(newPage: number) {
+    if(newPage > this.page) {
+      console.log('sono in if');
+      console.log(newPage);
+      console.log(this.page);
+      this.sampleSvc.toNextPage()
+    } else {
+      console.log('sono in else');
+      console.log(newPage);
+      console.log(this.page);
+      this.sampleSvc.toPreviousPage()
+    }
   }
 
 }

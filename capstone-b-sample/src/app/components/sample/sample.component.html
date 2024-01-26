@@ -10,10 +10,11 @@
     <div>
       <button class="btn btn-card" (click)="handleClickDetails()">Dettagli</button>
       <button class="btn btn-card m-2 ms-md-2 me-md-2" (click)="handleDownload()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+        <svg *ngIf="!loading" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
         </svg>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
       </button>
       <button class="btn btn-card me-md-2" (click)="handleFavourite()">
         <ng-container *ngIf="isFavourite(); else notFavourite">
@@ -28,7 +29,7 @@
         </ng-template>
       </button>
     </div>
-    <div class="sample-details my-3" [ngClass]="(data.showPrev) ? 'd-block' : 'd-none'">
+    <div class="sample-details my-3" *ngIf="!loadingDetails" [ngClass]="(data.showPrev) ? 'd-block' : 'd-none'">
       <span class="me-3">Autore: {{ data.username }}</span>
       <span class="me-3">|</span>
       <span class="me-3">Formato: {{ data.type }}</span>
@@ -36,6 +37,7 @@
       <span>Dimensione: {{ data.filesize | bytes }}</span>
       <audio *ngIf="data.previews" controls class="d-block mt-3"><source [src]="data.previews" type="audio/mpeg"></audio>
     </div>
+    <span *ngIf="loadingDetails" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
   </div>
 </div>
 

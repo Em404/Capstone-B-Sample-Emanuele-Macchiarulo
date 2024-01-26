@@ -29,8 +29,17 @@
     </div>
   </div>
 
+  <!-- loading -->
+  <div *ngIf="loading" class="mt-5">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+
   <!-- load sample oninit -->
-  <div class="container">
+  <div class="container" *ngIf="!loading">
     <div class="mt-5">
       <div class="row justify-content-center mt-3">
         <div class="col-12 mb-3" *ngFor=" let sample of list | slice : (page - 1) * pageSize : page * pageSize; track: item">
@@ -45,6 +54,7 @@
         [rotate]="true"
         [ellipses]="false"
         [collectionSize]="pages"
+        (pageChange)="changePage($event)"
       />
       <div class="navigation d-flex justify-content-between pb-5">
         <button class="btn btn-purple" (click)="goToPreviousPage()" [disabled]="!listObj.previous">Indietro</button>
