@@ -41,15 +41,11 @@ export class LoginService {
       .post('https://freesound.org/apiv2/oauth2/access_token/', body)
       .then((res) => {
         this.accessToken = res.access_token;
-        console.log(this.accessToken);
         localStorage.setItem('accessToken', this.accessToken)
-        // this.refreshToken = res.refresh_token;
         localStorage.setItem('accessData', JSON.stringify(res))
         this.loggedInSubject.next(true);
         this.router.navigate(['/home']);
         this.userData.next(res);
-        // console.log(this.userData);
-        // console.log(res);
       })
       .catch((err) => {
         alert('errore');
@@ -60,22 +56,16 @@ export class LoginService {
     const userJson:string|null = localStorage.getItem('accessData')
     if(!userJson) return
     const accessData = JSON.parse(userJson)
-    // console.log(accessData);
     this.loggedInSubject.next(accessData)
-    // console.log(this.userData);
-
   }
 
   logout() {
     localStorage.removeItem('accessData')
     this.loggedInSubject.next(false);
-    // this.userData.next(null);
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    // console.log(this.loggedInSubject.value);
-    // console.log(this.userData);
     return this.loggedInSubject.value;
   }
 }

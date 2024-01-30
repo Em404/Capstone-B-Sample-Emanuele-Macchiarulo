@@ -31,7 +31,4 @@ export class AuthService {
     return this.loginService.logout();
   }
 
-  // loginByToken(token: string) {
-  //   this.loginService.onReload(token);
-  // }
 }

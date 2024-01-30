@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { ISample, ISampleDetail } from '../models/i-sample';
+import { ISampleDetail } from '../models/i-sample';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ export class SampleDetailService {
 
   dataDetail!: ISampleDetail
   preferiti: ISampleDetail[] = []
-  // loading: boolean = false
 
   constructor(private apiSvc: ApiService) { }
 
@@ -25,7 +25,6 @@ export class SampleDetailService {
         },
       })
       .then((res) => {
-        // console.log(res);
         this.dataDetail = this.manageDetailsRes(res);
       })
       .catch((err) => {
@@ -70,17 +69,19 @@ export class SampleDetailService {
   }
 
   addToFavourite(sample: ISampleDetail) {
-    console.log(sample);
-    const preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
+    console.log('Chiamato addToFavourite');
+    const preferiti = this.getPreferiti();
     const isPresent = preferiti.find((s: ISampleDetail) => s.id === sample.id)
     if(isPresent) {
       localStorage.setItem("preferiti", JSON.stringify(preferiti.filter((s: ISampleDetail) => s.id !== sample.id)))
     } else {
       preferiti.unshift(sample)
       localStorage.setItem('preferiti', JSON.stringify(preferiti))
-      console.log(sample.name + ' aggiunto ai preferiti')
-      console.log(preferiti);
     }
+  }
+
+  getPreferiti(): ISampleDetail[] {
+    return JSON.parse(localStorage.getItem('preferiti') || '') || [];
   }
 
   checkFavourite(sample: ISampleDetail) {

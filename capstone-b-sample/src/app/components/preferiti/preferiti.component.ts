@@ -4,25 +4,18 @@ import { ISampleDetail } from '../../models/i-sample';
 @Component({
   selector: 'app-preferiti',
   templateUrl: './preferiti.component.html',
-  styleUrl: './preferiti.component.scss'
+  styleUrl: './preferiti.component.scss',
 })
 export class PreferitiComponent {
-
-  preferiti: ISampleDetail[] = []
+  preferiti: ISampleDetail[] = [];
 
   constructor() {}
 
   ngOnInit() {
-    this.getFavourites()
-  }
-
-  getFavourites() {
-    this.preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
+    this.preferiti = JSON.parse(localStorage.getItem('preferiti') || '');
   }
 
   isEmpty() {
-    this.preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
     return this.preferiti.length === 0;
   }
-
 }

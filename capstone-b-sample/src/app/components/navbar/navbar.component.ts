@@ -1,4 +1,3 @@
-import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
@@ -12,8 +11,9 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent {
   isLoggedSubscription!:Subscription;
   isLogged!:boolean;
+  toggle: boolean = false;
 
-  constructor(private loginSvc: LoginService, private router: Router, private authSvc: AuthService) {}
+  constructor(private loginSvc: LoginService, private router: Router) {}
 
   ngOnInit(){
     this.isLoggedSubscription = this.loginSvc.loggedIn$.subscribe(data => {
@@ -23,7 +23,6 @@ export class NavbarComponent {
 
   isLoggedIn() {
     return this.loginSvc.isLoggedIn();
-    // return this.isLoggedSubscription
   }
 
   loginLogout() {
@@ -32,6 +31,10 @@ export class NavbarComponent {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  toggleMenu() {
+    this.toggle = !this.toggle;
   }
 
 }

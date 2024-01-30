@@ -13,10 +13,8 @@ export class SampleService {
     ISample[]
   >([]);
   sampleObj!: ISampleObj;
-
   nextPage: string =''
   previousPage: string =''
-
   loading: boolean = false
 
   constructor(private apiSvc: ApiService, private loginSvc: LoginService) {}
@@ -32,10 +30,8 @@ export class SampleService {
       .then((res: ISampleObj) => {
         this.loading = false
         this.sampleList = res.results;
-        console.log('res getsamples ', res);
         this.getPage(res);
         this.sampleObj = res;
-        console.log(this.sampleObj.count);
       });
   }
 
@@ -50,9 +46,6 @@ export class SampleService {
         this.sampleList = res.results;
         this.getPage(res);
         this.sampleObj = res;
-        console.log(this.sampleObj);
-        console.log('La res della ricerca', res);
-        console.log(this.sampleList);
       });
   }
 
@@ -62,13 +55,11 @@ export class SampleService {
     } else {
       this.nextPage = '';
     }
-    console.log('get next page ', this.nextPage);
     if (res.previous != null) {
       this.previousPage = res.previous;
     } else {
       this.previousPage = '';
     }
-    console.log('get pevious page ', this.previousPage);
   }
 
   toPreviousPage() {
@@ -97,7 +88,6 @@ export class SampleService {
           this.sampleList = res.results;
           this.getPage(res);
           this.sampleObj = res;
-          console.log(res);
         })
         .catch((error) => {
           console.error('Errore durante la richiesta API:', error);
@@ -107,5 +97,18 @@ export class SampleService {
     }
   }
 
+  toPage(page: number) {
+    this.apiSvc
+    .get('https://freesound.org/apiv2/search/text/?&query=&weights=&page=' + page, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    })
+    .then((res: ISampleObj) => {
+      this.sampleList = res.results;
+      this.getPage(res);
+      this.sampleObj = res;
+    });
+  }
 
 }

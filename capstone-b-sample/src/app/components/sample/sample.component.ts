@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ISampleDetail } from '../../models/i-sample';
 import { SampleDetailService } from '../../services/sample-detail.service';
 
@@ -15,10 +15,6 @@ export class SampleComponent {
   preferiti: ISampleDetail[] = [];
   loading: boolean = false;
   loadingDetails: boolean = false;
-
-  // public get loading() :boolean {
-  //   return this.sampleDetailSvc.loading
-  // }
 
   setShowPrev(detail: ISampleDetail) {
     this.data = {

@@ -21,3 +21,28 @@
     min-height: 670px;
   }
 }
+
+// ngb-pagination
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  background-color:  var(--purple) !important;
+  color: #fff !important;
+  border-radius: 10px;
+}
+
+ngb-pagination ::ng-deep a {
+  color: #d1d1d1 !important;
+}
+
+ngb-pagination ::ng-deep .disabled a {
+  color: #575757 !important;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: transparent
+}

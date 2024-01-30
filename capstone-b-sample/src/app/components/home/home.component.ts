@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { SampleService } from '../../services/sample.service';
-import { ISample, ISampleDetail, ISampleObj } from '../../models/i-sample';
+import { ISampleDetail, ISampleObj } from '../../models/i-sample';
 import {
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { count } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +18,7 @@ export class HomeComponent {
   public page: number = 1
   public pageSize: number = 15
   public items: number = 0
+  public oldPage: number = 1
 
   constructor(private sampleSvc: SampleService) {
     this.sampleForm = new UntypedFormGroup({
@@ -47,6 +47,10 @@ export class HomeComponent {
     return this.sampleSvc.loading
   }
 
+  setOldPage(page: number) {
+    this.oldPage = page
+  }
+
   searchSample(event: Event) {
     const search = (event.target as HTMLInputElement).value
     console.log('sto cercando', search);
@@ -66,16 +70,18 @@ export class HomeComponent {
   }
 
   changePage(newPage: number) {
-    if(newPage > this.page) {
-      console.log('sono in if');
-      console.log(newPage);
-      console.log(this.page);
+    if((newPage - this.oldPage) === 1){
       this.sampleSvc.toNextPage()
-    } else {
-      console.log('sono in else');
-      console.log(newPage);
-      console.log(this.page);
+      this.setOldPage(newPage)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if((this.oldPage - newPage) === 1) {
       this.sampleSvc.toPreviousPage()
+      this.setOldPage(newPage)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      this.sampleSvc.toPage(newPage)
+      this.setOldPage(newPage)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
