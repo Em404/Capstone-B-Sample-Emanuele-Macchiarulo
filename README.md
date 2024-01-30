@@ -6,5 +6,5 @@ Avrà un sistema di autenticazione, si potranno cercare suoni, ascoltare delle p
 
 Implementazione e avvio 
 
-1) npm i (per la ricostruzione delle dipendenze del progetto)
+1) npm i
 2) ng add @ng-bootstrap/ng-bootstrap
