@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { ISampleDetail } from '../models/i-sample';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 
 @Injectable({
@@ -9,7 +10,6 @@ import { ISampleDetail } from '../models/i-sample';
 export class SampleDetailService {
 
   dataDetail!: ISampleDetail
-  preferiti: ISampleDetail[] = []
 
   constructor(private apiSvc: ApiService) { }
 
@@ -67,32 +67,5 @@ export class SampleDetailService {
         alert('errore download');
       });
   }
-
-  addToFavourite(sample: ISampleDetail) {
-    console.log('Chiamato addToFavourite');
-    const preferiti = this.getPreferiti();
-    const isPresent = preferiti.find((s: ISampleDetail) => s.id === sample.id)
-    if(isPresent) {
-      localStorage.setItem("preferiti", JSON.stringify(preferiti.filter((s: ISampleDetail) => s.id !== sample.id)))
-    } else {
-      preferiti.unshift(sample)
-      localStorage.setItem('preferiti', JSON.stringify(preferiti))
-    }
-  }
-
-  getPreferiti(): ISampleDetail[] {
-    return JSON.parse(localStorage.getItem('preferiti') || '') || [];
-  }
-
-  checkFavourite(sample: ISampleDetail) {
-    const preferiti = JSON.parse(localStorage.getItem('preferiti') || '')
-    return (preferiti.find((s: ISampleDetail) => s.id === sample.id))
-  }
-
-  // deleteFromFavourite(id: number) {
-  //   this.preferiti = this.preferiti.filter(pref => pref.id !== id);
-  //   localStorage.setItem("preferiti", JSON.stringify(this.preferiti))
-  //   console.log(this.preferiti);
-  // }
 
 }

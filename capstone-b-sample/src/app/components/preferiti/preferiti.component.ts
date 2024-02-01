@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ISampleDetail } from '../../models/i-sample';
+import { SampleDetailService } from '../../services/sample-detail.service';
+import { FavouriteService } from '../../services/favourite.service';
 
 @Component({
   selector: 'app-preferiti',
@@ -9,10 +11,12 @@ import { ISampleDetail } from '../../models/i-sample';
 export class PreferitiComponent {
   preferiti: ISampleDetail[] = [];
 
-  constructor() {}
+  constructor(private favouriteSvc: FavouriteService) {}
 
   ngOnInit() {
-    this.preferiti = JSON.parse(localStorage.getItem('preferiti') || '');
+    this.favouriteSvc.preferiti$.subscribe((preferiti) => {
+      this.preferiti = preferiti;
+    });
   }
 
   isEmpty() {

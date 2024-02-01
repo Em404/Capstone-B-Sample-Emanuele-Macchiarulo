@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ISampleDetail } from '../../models/i-sample';
 import { SampleDetailService } from '../../services/sample-detail.service';
+import { FavouriteService } from '../../services/favourite.service';
 
 @Component({
   selector: 'app-sample',
@@ -10,7 +11,7 @@ import { SampleDetailService } from '../../services/sample-detail.service';
 export class SampleComponent {
   @Input() data!: ISampleDetail;
 
-  constructor(private sampleDetailSvc: SampleDetailService) {}
+  constructor(private sampleDetailSvc: SampleDetailService, private favouriteSvc: FavouriteService) {}
 
   preferiti: ISampleDetail[] = [];
   loading: boolean = false;
@@ -63,14 +64,11 @@ export class SampleComponent {
   }
 
   handleFavourite() {
-    this.sampleDetailSvc.addToFavourite(this.data);
+    this.favouriteSvc.addToFavourite(this.data);
   }
 
   isFavourite() {
-    return this.sampleDetailSvc.checkFavourite(this.data);
+    return this.favouriteSvc.checkFavourite(this.data);
   }
 
-  // handleRemoveFavourite() {
-  //   this.sampleDetailSvc.deleteFromFavourite(this.data.id)
-  // }
 }
