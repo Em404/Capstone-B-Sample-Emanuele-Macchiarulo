@@ -33,7 +33,6 @@ export class SampleDetailService {
   }
 
   manageDetailsRes(res: any) {
-    // const details: ISampleDetail = {
     return {
       id: res.id,
       name: res.name,
@@ -46,9 +45,6 @@ export class SampleDetailService {
       username: res.username,
       images: res.images['waveform_l'],
     };
-    // console.log("dettagli", details);
-    // this.setDataDetail(details)
-    // this.loadSample(details);
   }
 
   downloadSample(id: Number) {

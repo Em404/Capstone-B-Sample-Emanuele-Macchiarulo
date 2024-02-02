@@ -9,15 +9,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SampleService {
   sampleList: ISampleDetail[] = [];
-  sampleListSubject: BehaviorSubject<ISample[]> = new BehaviorSubject<
-    ISample[]
-  >([]);
+  sampleListSubject: BehaviorSubject<ISample[]> = new BehaviorSubject<ISample[]>([]);
   sampleObj!: ISampleObj;
   nextPage: string =''
   previousPage: string =''
   loading: boolean = false
 
-  constructor(private apiSvc: ApiService, private loginSvc: LoginService) {}
+  constructor(private apiSvc: ApiService) {}
 
   getSamples() {
     this.loading = true

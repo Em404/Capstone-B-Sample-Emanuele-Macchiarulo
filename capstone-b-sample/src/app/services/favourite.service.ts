@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class FavouriteService {
 
-  constructor() { }
+  constructor() {}
 
   private preferitiSubject = new BehaviorSubject<ISampleDetail[]>(this.getPreferiti());
   preferiti$ = this.preferitiSubject.asObservable();
