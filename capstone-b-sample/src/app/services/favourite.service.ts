@@ -31,8 +31,18 @@ export class FavouriteService {
     return preferiti.find((s: ISampleDetail) => s.id === sample.id);
   }
 
+  // private getPreferiti(): ISampleDetail[] {
+  //   return JSON.parse(localStorage.getItem('preferiti') || '') || [];
+  // }
+
   private getPreferiti(): ISampleDetail[] {
-    return JSON.parse(localStorage.getItem('preferiti') || '') || [];
+    const preferitiString = localStorage.getItem('preferiti') || '';
+    try {
+      return JSON.parse(preferitiString) || [];
+    } catch (error) {
+      console.error('Errore durante il parsing del JSON:', error);
+      return [];
+    }
   }
 
   private updatePreferiti(updatedPreferiti: ISampleDetail[]) {

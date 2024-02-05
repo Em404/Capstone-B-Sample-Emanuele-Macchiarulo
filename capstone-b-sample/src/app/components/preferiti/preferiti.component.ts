@@ -13,10 +13,21 @@ export class PreferitiComponent {
 
   constructor(private favouriteSvc: FavouriteService) {}
 
+  // ngOnInit() {
+  //   this.favouriteSvc.preferiti$.subscribe((preferiti) => {
+  //     this.preferiti = preferiti;
+  //   });
+  // }
+
   ngOnInit() {
-    this.favouriteSvc.preferiti$.subscribe((preferiti) => {
-      this.preferiti = preferiti;
-    });
+    if (this.favouriteSvc.preferiti$) {
+      this.favouriteSvc.preferiti$.subscribe((preferiti) => {
+        console.log('preferiti:', preferiti);
+        this.preferiti = preferiti;
+      });
+    } else {
+      console.error('preferiti$ non definito.');
+    }
   }
 
   isEmpty() {
